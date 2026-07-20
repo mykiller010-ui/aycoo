@@ -35,10 +35,10 @@ export const links: SocialLink[] = [
     href: "https://github.com/anwarvip",
   },
   {
-    label: "Twitch",
-    icon: "twitch",
+    label: "instagram",
+    icon: "instagram",
     color: "#9146ff",
-    href: "",
+    href: "https://www.instagram.com/aycoo1/",
   },
   {
     label: "Rhythia",
