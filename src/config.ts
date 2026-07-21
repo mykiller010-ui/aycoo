@@ -41,7 +41,7 @@ export const links: SocialLink[] = [
     href: "https://www.instagram.com/aycoo1/",
   },
   {
-    label: "Rhythia",
+     label: "Gallery",
     icon: "rhythia",
     color: "#88a9fc",
     href: "/gallery",
