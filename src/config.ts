@@ -54,12 +54,7 @@ export const links: SocialLink[] = [
   href: "https://steamcommunity.com/id/AYcoo1/",
 },
   
-  {
-    label: "VRChat",
-    icon: "vrchat",
-    color: "#5edee7",
-    href: "https://vrchat.com/home/user/",
-  },
+ 
 ];
 
 export const tracks: Track[] = [
