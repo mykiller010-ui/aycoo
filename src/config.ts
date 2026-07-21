@@ -53,7 +53,7 @@ export const links: SocialLink[] = [
   color: "#66c0f4",
   href: "https://steamcommunity.com/id/AYcoo1/",
 },
-  },
+  
   {
     label: "VRChat",
     icon: "vrchat",
