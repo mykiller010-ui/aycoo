@@ -38,8 +38,8 @@ if (el instanceof HTMLAnchorElement && link.href) {
   if (link.href === "/gallery") {
     el.href = "#";
 
-    el.addEventListener("click", (e) => {
-      e.preventDefault();
+    el.addEventListener("click", (event) => {
+      event.preventDefault();
       openGallery();
     });
   } else {
