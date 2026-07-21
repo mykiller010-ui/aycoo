@@ -44,7 +44,7 @@ export const links: SocialLink[] = [
     label: "Rhythia",
     icon: "rhythia",
     color: "#88a9fc",
-    href: "https://rhythia.com/player/",
+    href: "/gallery">",
   },
   {
     label: "osu!",
