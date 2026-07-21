@@ -47,10 +47,12 @@ export const links: SocialLink[] = [
     href: "/gallery",
   },
   {
-    label: "osu!",
-    icon: "osu",
-    color: "#ff66aa",
-    href: "https://osu.ppy.sh/users/",
+   {
+  label: "Steam",
+  icon: "steam",
+  color: "#66c0f4",
+  href: "https://steamcommunity.com/id/AYcoo1/",
+},
   },
   {
     label: "VRChat",
