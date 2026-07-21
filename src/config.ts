@@ -46,7 +46,7 @@ export const links: SocialLink[] = [
     color: "#88a9fc",
     href: "/gallery",
   },
-  {
+  
    {
   label: "Steam",
   icon: "steam",
