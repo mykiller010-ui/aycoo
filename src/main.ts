@@ -2,7 +2,7 @@ import "@fontsource/zen-kaku-gothic-new/latin-400.css";
 import "@fontsource/zen-kaku-gothic-new/latin-500.css";
 import "@fontsource/zen-kaku-gothic-new/latin-700.css";
 import "./style.css";
-
+import { openGallery } from "./gallery";
 import { profile, links, tracks, slides, settings } from "./config";
 import { icons } from "./icons";
 import { startSlideshow } from "./slideshow";
@@ -34,11 +34,20 @@ for (const link of links) {
   label.textContent = link.label;
   el.append(label);
 
-  if (el instanceof HTMLAnchorElement && link.href) {
+if (el instanceof HTMLAnchorElement && link.href) {
+  if (link.href === "/gallery") {
+    el.href = "#";
+
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      openGallery();
+    });
+  } else {
     el.href = link.href;
     el.target = "_blank";
     el.rel = "noreferrer noopener";
-  } else if (el instanceof HTMLButtonElement && link.copy) {
+  }
+} else if (el instanceof HTMLButtonElement && link.copy) {
     el.type = "button";
     const text = link.copy;
     el.addEventListener("click", async () => {
