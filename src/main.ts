@@ -104,11 +104,21 @@ const visitorCount = document.querySelector("#visitor-count");
 
 if (visitorCount) {
   fetch("https://api.counterapi.dev/v1/aycoo/visits/up")
-    .then((response) => response.json())
+    .then(async (response) => {
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(JSON.stringify(data));
+      }
+
+      return data;
+    })
     .then((data: { count: number }) => {
+      console.log("Visitor counter:", data);
       visitorCount.textContent = `${data.count.toLocaleString()} visitors`;
     })
-    .catch(() => {
-      visitorCount.textContent = "visitors";
+    .catch((error) => {
+      console.error("Visitor counter failed:", error);
+      visitorCount.textContent = "counter error";
     });
 }
