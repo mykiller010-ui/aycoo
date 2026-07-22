@@ -99,19 +99,3 @@ if (settings.autoplayOnFirstInteraction) {
   };
   window.addEventListener("pointerdown", kick, true);
 }
-// Visitor counter
-const visitorCount = document.querySelector("#visitor-count");
-
-if (visitorCount) {
-  fetch("https://api.counterapi.dev/v1/aycoo-website/visits/up")
-    .then((response) => {
-      if (!response.ok) throw new Error("Counter failed");
-      return response.json();
-    })
-    .then((data) => {
-      visitorCount.textContent = `${data.count} VISITORS`;
-    })
-    .catch(() => {
-      visitorCount.textContent = "COUNTER ERROR";
-    });
-}
