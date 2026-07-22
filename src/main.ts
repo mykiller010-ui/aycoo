@@ -103,33 +103,15 @@ if (settings.autoplayOnFirstInteraction) {
 const visitorCount = document.querySelector("#visitor-count");
 
 if (visitorCount) {
-  fetch("https://api.counterapi.dev/v1/aycoo/visits/up")
-    .then(async (response) => {
-      const data = await response.json();
-
-      console.log("Counter API response:", data);
-
-      if (!response.ok) {
-        throw new Error(JSON.stringify(data));
-      }
-
-      return data;
+  fetch("https://api.counterapi.dev/v1/aycoo-website/visits/up")
+    .then((response) => {
+      if (!response.ok) throw new Error("Counter failed");
+      return response.json();
     })
     .then((data) => {
-      const count =
-        data.count ??
-        data.value ??
-        data.visits ??
-        data.total ??
-        data.result;
-
-      visitorCount.textContent =
-        typeof count === "number"
-          ? `${count.toLocaleString()} visitors`
-          : "counter error";
+      visitorCount.textContent = `${data.count} VISITORS`;
     })
-    .catch((error) => {
-      console.error("Visitor counter failed:", error);
-      visitorCount.textContent = "counter error";
+    .catch(() => {
+      visitorCount.textContent = "COUNTER ERROR";
     });
 }
