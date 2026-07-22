@@ -107,15 +107,26 @@ if (visitorCount) {
     .then(async (response) => {
       const data = await response.json();
 
+      console.log("Counter API response:", data);
+
       if (!response.ok) {
         throw new Error(JSON.stringify(data));
       }
 
       return data;
     })
-    .then((data: { count: number }) => {
-      console.log("Visitor counter:", data);
-      visitorCount.textContent = `${data.count.toLocaleString()} visitors`;
+    .then((data) => {
+      const count =
+        data.count ??
+        data.value ??
+        data.visits ??
+        data.total ??
+        data.result;
+
+      visitorCount.textContent =
+        typeof count === "number"
+          ? `${count.toLocaleString()} visitors`
+          : "counter error";
     })
     .catch((error) => {
       console.error("Visitor counter failed:", error);
