@@ -80,8 +80,9 @@ export const tracks: Track[] = [
 
 
 {
-    title: "Caleb Belkin - I Fall In Love Too Easily",
-    src: "./music/caleb_belkin_i_fall_in_love_too_easily.mp3",
+  title: "Yagih Mael - Fly Me To The Moon",
+    src: "./music/yagih_mael_fly_me_to_the_moon.mp3",
+  
   },
   {
     title: "Hisohkah - School Rooftop",
@@ -100,8 +101,8 @@ export const tracks: Track[] = [
     src: "./music/lovey_ever_since.mp3",
   },
   {
-    title: "Yagih Mael - Fly Me To The Moon",
-    src: "./music/yagih_mael_fly_me_to_the_moon.mp3",
+     title: "Caleb Belkin - I Fall In Love Too Easily",
+    src: "./music/caleb_belkin_i_fall_in_love_too_easily.mp3",
   },
 ];
 
