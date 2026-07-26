@@ -16,25 +16,6 @@ const $ = <T extends HTMLElement>(sel: string): T =>
 
 
 
-const cursor = document.querySelector<HTMLElement>("#custom-cursor");
-
-if (cursor && matchMedia("(hover: hover) and (pointer: fine)").matches) {
-  window.addEventListener("pointermove", (event) => {
-    cursor.style.left = `${event.clientX}px`;
-    cursor.style.top = `${event.clientY}px`;
-  });
-
-  document.querySelectorAll("a, button, .chip").forEach((element) => {
-    element.addEventListener("mouseenter", () => {
-      cursor.classList.add("hover");
-    });
-
-    element.addEventListener("mouseleave", () => {
-      cursor.classList.remove("hover");
-    });
-  });
-}
-
 
 
 $("#kanji").textContent = profile.kanji;
