@@ -4,7 +4,9 @@ export type IconName =
   | "github"
   | "steam"
   | "vrchat"
-  | "rhythia";
+  | "tiktok"
+  | "x"
+  | "spotify";
 
 export const icons: Record<IconName, string> = {
   instagram:
