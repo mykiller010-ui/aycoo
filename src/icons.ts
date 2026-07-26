@@ -4,6 +4,7 @@ export type IconName =
   | "github"
   | "steam"
   | "vrchat"
+  | "rhythia"
   | "tiktok"
   | "x"
   | "spotify";
