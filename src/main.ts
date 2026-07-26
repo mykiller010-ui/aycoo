@@ -10,7 +10,7 @@ import { startSnow } from "./snow";
 import { initTilt } from "./tilt";
 import { createPlayer } from "./player";
 import { showToast } from "./toast";
-
+import { initCursor } from "./cursor";
 const $ = <T extends HTMLElement>(sel: string): T =>
   document.querySelector(sel) as T;
 
@@ -94,7 +94,7 @@ startSnow($<HTMLCanvasElement>("#snow"));
 initTilt($("#tilt"));
 
 const player = createPlayer($("#player"), tracks, settings.startVolume);
-
+initCursor();
 if (settings.autoplayOnFirstInteraction) {
   const kick = (e: PointerEvent) => {
     if ((e.target as HTMLElement | null)?.closest("#player")) return;
