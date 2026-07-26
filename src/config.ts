@@ -53,6 +53,24 @@ export const links: SocialLink[] = [
   color: "#66c0f4",
   href: "https://steamcommunity.com/id/AYcoo1/",
 },
+  {
+  label: "TikTok",
+  icon: "tiktok",
+  color: "#ffffff",
+  href: "https://www.tiktok.com/@YOUR_USERNAME",
+},
+{
+  label: "X",
+  icon: "x",
+  color: "#ffffff",
+  href: "https://x.com/YOUR_USERNAME",
+},
+{
+  label: "Spotify",
+  icon: "spotify",
+  color: "#1db954",
+  href: "https://open.spotify.com/user/ebi00oxrqpcj99vi96cii1xxn?si=2785c1039e01465c",
+},
   
  
 ];
