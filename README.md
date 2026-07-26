@@ -1,7 +1,4 @@
-# yoru.moe
 
-My personal landing page - links, lo-fi, and a little bit of night.
-Live at <https://yoru.moe>
 
 ## Stack
 
