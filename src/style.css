@@ -823,3 +823,11 @@ body {
   text-transform: uppercase;
   opacity: 0.8;
 }
+body {
+  cursor: url("/cursor.svg") 8 8, auto;
+}
+
+a,
+button {
+  cursor: url("/cursor-pointer.svg") 8 8, pointer;
+}
