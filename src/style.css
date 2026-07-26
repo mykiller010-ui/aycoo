@@ -823,3 +823,20 @@ body {
   text-transform: uppercase;
   opacity: 0.8;
 }
+#custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+html,
+body,
+a,
+button {
+  cursor: url("/cursor.svg") 16 16, auto !important;
+}
