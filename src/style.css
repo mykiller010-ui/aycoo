@@ -825,7 +825,8 @@ body {
 }
 /* Custom mouse cursor */
 body {
-  cursor: none;
+   cursor: url("/cursor.svg"), auto;
+
 }
 
 a,
