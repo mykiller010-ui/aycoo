@@ -903,3 +903,44 @@ button {
   font-size: 12px;
   opacity: 0.6;
 }
+.discord-avatar-wrapper {
+  position: relative;
+  width: 52px;
+  height: 52px;
+}
+
+#discord-avatar {
+  position: absolute;
+  inset: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+#discord-decoration {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  left: -12px;
+  top: -12px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#discord-decoration[hidden] {
+  display: none;
+}
+
+.discord-status {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 15px;
+  height: 15px;
+  border: 3px solid #090b14;
+  border-radius: 50%;
+  z-index: 3;
+}
