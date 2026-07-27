@@ -905,15 +905,15 @@ button {
 }
 .discord-avatar-wrapper {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: 62px;
+  height: 62px;
 }
 
 #discord-avatar {
   position: absolute;
   inset: 0;
-  width: 52px;
-  height: 52px;
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
   object-fit: cover;
   z-index: 1;
@@ -921,10 +921,10 @@ button {
 
 #discord-decoration {
   position: absolute;
-  width: 76px;
-  height: 76px;
-  left: -12px;
-  top: -12px;
+  width: 90px;
+  height: 90px;
+  left: -14px;
+  top: -14px;
   object-fit: contain;
   pointer-events: none;
   z-index: 2;
