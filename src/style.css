@@ -921,17 +921,13 @@ button {
 
 #discord-decoration {
   position: absolute;
-  width: 90px;
-  height: 90px;
-  left: -14px;
-  top: -14px;
+  width: 76px;
+  height: 76px;
+  left: -7px;
+  top: -7px;
   object-fit: contain;
   pointer-events: none;
   z-index: 2;
-}
-
-#discord-decoration[hidden] {
-  display: none;
 }
 
 .discord-status {
