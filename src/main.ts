@@ -11,6 +11,7 @@ import { initTilt } from "./tilt";
 import { createPlayer } from "./player";
 import { showToast } from "./toast";
 import { initCursor } from "./cursor";
+import { initDiscord } from "./discord";
 const $ = <T extends HTMLElement>(sel: string): T =>
   document.querySelector(sel) as T;
 
@@ -95,6 +96,7 @@ initTilt($("#tilt"));
 
 const player = createPlayer($("#player"), tracks, settings.startVolume);
 initCursor();
+initDiscord();
 if (settings.autoplayOnFirstInteraction) {
   const kick = (e: PointerEvent) => {
     if ((e.target as HTMLElement | null)?.closest("#player")) return;
