@@ -24,11 +24,11 @@ export async function initDiscord(): Promise<void> {
   const decoration = document.querySelector<HTMLImageElement>(
     "#discord-decoration",
   );
-  const username = document.querySelector<HTMLElement>("#discord-username");
+  
   const presence = document.querySelector<HTMLElement>("#discord-presence");
   const status = document.querySelector<HTMLElement>("#discord-status");
 
-  if (!avatar || !decoration || !username || !presence || !status) return;
+  if (!avatar || !decoration || !presence || !status) return;
 
   try {
     const response = await fetch(
@@ -45,7 +45,7 @@ export async function initDiscord(): Promise<void> {
     const data = result.data;
     const user = data.discord_user;
 
-    username.textContent = user.global_name || user.username;
+   
 
     const statusNames = {
       online: "Online",
