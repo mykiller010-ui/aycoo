@@ -86,7 +86,7 @@ export function createPlayer(
     if (!("mediaSession" in navigator)) return;
     navigator.mediaSession.metadata = new MediaMetadata({
       title: tracks[index].title,
-      artist: "yoru.moe",
+      artist: "AYcoo",
       artwork: [{ src: "/cover.png", sizes: "512x512", type: "image/png" }],
     });
   };
