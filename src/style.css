@@ -972,7 +972,7 @@ button {
 .about-ar {
     position: absolute;
     right: 3rem;
-    top: 39rem; /* Adjust to align with the English section */
+    top: 39rem;
     width: min(620px, 42vw);
 
     text-align: right;
@@ -980,6 +980,19 @@ button {
 
     color: rgba(255,255,255,.82);
     line-height: 1.9;
+}
+/* Tablets & phones */
+@media (max-width: 900px) {
+
+    .about-ar {
+        position: static;
+        width: min(620px, 90vw);
+
+        margin: 2rem auto 0;
+
+        text-align: right;
+    }
+
 }
 
 .about-ar h2 {
