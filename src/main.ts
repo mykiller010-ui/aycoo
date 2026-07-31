@@ -109,38 +109,26 @@ if (settings.autoplayOnFirstInteraction) {
 
 
 
-const cards = document.querySelectorAll(".terminal-card");
+const btn = document.getElementById("terminalButton")!;
+const terminal = document.getElementById("terminal")!;
 
-const observer = new IntersectionObserver((entries) => {
+btn.addEventListener("click", () => {
 
-    entries.forEach(entry => {
+    terminal.classList.toggle("open");
 
-        if(entry.isIntersecting){
+    if (terminal.classList.contains("open")) {
 
-            entry.target.classList.add("show");
+        btn.textContent = "> Hide System Profile";
 
-        }
+        terminal.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
 
-    });
+    } else {
 
-},{
-    threshold:0.25
-});
-
-cards.forEach(card => observer.observe(card));
-
-const scan = document.querySelector(".scanline") as HTMLElement;
-
-const terminal = document.querySelector(".terminal");
-
-new IntersectionObserver(entries=>{
-
-    if(entries[0].isIntersecting){
-
-        scan.style.transition="width 2s ease";
-
-        scan.style.width="100%";
+        btn.textContent = "> Initialize System Profile";
 
     }
 
-},{threshold:.2}).observe(terminal!);
+});
