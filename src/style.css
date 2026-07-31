@@ -1187,3 +1187,46 @@ button {
     color:#65f7b1;
     margin-right:12px;
 }
+.terminal-button{
+    display:block;
+    margin:80px auto 40px;
+    padding:14px 28px;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+
+    color:#8dc8ff;
+
+    border-radius:12px;
+
+    font-size:.9rem;
+    letter-spacing:.18em;
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.terminal-button:hover{
+    background:rgba(255,255,255,.08);
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(116,185,255,.15);
+}
+
+.terminal{
+    max-height:0;
+    overflow:hidden;
+
+    opacity:0;
+    transform:translateY(30px);
+
+    transition:
+        max-height .8s ease,
+        opacity .5s ease,
+        transform .6s ease;
+}
+
+.terminal.open{
+    max-height:5000px;
+    opacity:1;
+    transform:none;
+}
