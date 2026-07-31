@@ -109,15 +109,21 @@ if (settings.autoplayOnFirstInteraction) {
 
 
 
-const toggle = document.getElementById("profileToggle");
-const panel = document.getElementById("profilePanel");
+const toggle = document.getElementById("profileToggle") as HTMLButtonElement | null;
+const panel = document.getElementById("profilePanel") as HTMLElement | null;
 
-toggle.onclick = () => {
+if (!toggle || !panel) {
+    console.warn("Profile panel not found.");
+} else {
 
-    panel.classList.toggle("show");
+    toggle.addEventListener("click", () => {
 
-    toggle.textContent = panel.classList.contains("show")
-        ? "Hide Profile ▲"
-        : "Load Profile ▼";
+        panel.classList.toggle("show");
 
-};
+        toggle.textContent = panel.classList.contains("show")
+            ? "Hide Profile ▲"
+            : "Load Profile ▼";
+
+    });
+
+}
