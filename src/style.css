@@ -982,7 +982,7 @@ button {
     line-height: 1.9;
 }
 /* Tablets & phones */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
     .about-ar {
         position: static;
