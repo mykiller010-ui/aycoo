@@ -109,26 +109,4 @@ if (settings.autoplayOnFirstInteraction) {
 
 
 
-const btn = document.getElementById("terminalButton")!;
-const terminal = document.getElementById("terminal")!;
 
-btn.addEventListener("click", () => {
-
-    terminal.classList.toggle("open");
-
-    if (terminal.classList.contains("open")) {
-
-        btn.textContent = "> Hide System Profile";
-
-        terminal.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    } else {
-
-        btn.textContent = "> Initialize System Profile";
-
-    }
-
-});
