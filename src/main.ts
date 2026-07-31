@@ -109,4 +109,38 @@ if (settings.autoplayOnFirstInteraction) {
 
 
 
+const cards = document.querySelectorAll(".terminal-card");
 
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.25
+});
+
+cards.forEach(card => observer.observe(card));
+
+const scan = document.querySelector(".scanline") as HTMLElement;
+
+const terminal = document.querySelector(".terminal");
+
+new IntersectionObserver(entries=>{
+
+    if(entries[0].isIntersecting){
+
+        scan.style.transition="width 2s ease";
+
+        scan.style.width="100%";
+
+    }
+
+},{threshold:.2}).observe(terminal!);
