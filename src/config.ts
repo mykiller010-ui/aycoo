@@ -17,7 +17,7 @@ export interface Track {
 export const profile = {
   kanji: "夜",
   name: "AYcoo",
-  tagline: "Hobbyist developer, network engineer, music enthusiast,artest love painting and co-op gamer",
+  tagline: "",
 };
 
 export const links: SocialLink[] = [
