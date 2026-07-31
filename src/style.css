@@ -972,7 +972,7 @@ button {
 .about-ar {
     position: absolute;
     right: 3rem;
-    top: 45rem; /* Adjust to align with the English section */
+    top: 39rem; /* Adjust to align with the English section */
     width: min(620px, 42vw);
 
     text-align: right;
