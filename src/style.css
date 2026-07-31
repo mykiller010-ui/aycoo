@@ -1108,12 +1108,31 @@ button {
 .terminal{
     width:min(900px,92vw);
     margin:120px auto 200px;
+
     background:rgba(7,10,18,.55);
     backdrop-filter:blur(20px);
+
     border:1px solid rgba(255,255,255,.08);
     border-radius:18px;
-    overflow:hidden;
+
     box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+    overflow:hidden;
+
+    max-height:0;
+    opacity:0;
+    transform:translateY(30px);
+
+    transition:
+        max-height .8s ease,
+        opacity .5s ease,
+        transform .6s ease;
+}
+
+.terminal.open{
+    max-height:5000px;
+    opacity:1;
+    transform:none;
 }
 
 .terminal-header{
@@ -1212,21 +1231,4 @@ button {
     box-shadow:0 0 20px rgba(116,185,255,.15);
 }
 
-.terminal{
-    max-height:0;
-    overflow:hidden;
 
-    opacity:0;
-    transform:translateY(30px);
-
-    transition:
-        max-height .8s ease,
-        opacity .5s ease,
-        transform .6s ease;
-}
-
-.terminal.open{
-    max-height:5000px;
-    opacity:1;
-    transform:none;
-}
