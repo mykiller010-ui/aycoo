@@ -1002,3 +1002,7 @@ button {
     color: rgba(255,255,255,.95);
     font-style: italic;
 }
+.about-wrapper{
+    margin-top:4rem;
+
+    width:min(1300px,90vw);
