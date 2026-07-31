@@ -941,68 +941,35 @@ button {
   z-index: 3;
 }
 
+.about-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: min(1400px, 92vw);
+    margin: 2rem auto 0;
+    gap: 5rem;
+}
+
 .about {
-    width: min(620px, 90vw);
-    margin-top: 2rem;
+    flex: 1;
+    max-width: 560px;
+
     text-align: left;
     color: rgba(255,255,255,.82);
     line-height: 1.8;
 }
 
-.about h2 {
-    margin-bottom: .8rem;
-    font-size: .95rem;
-    text-transform: uppercase;
-    letter-spacing: .35em;
-    color: rgba(255,255,255,.55);
-}
-
-.about p {
-    margin: 0;
-    font-size: .95rem;
-}
-
-.about blockquote {
-    margin-top: 1.4rem;
-    padding-left: 1rem;
-    border-left: 2px solid rgba(255,255,255,.25);
-    color: rgba(255,255,255,.95);
-    font-style: italic;
-}
 .about-ar {
-    position: absolute;
-    right: 3rem;
-    top: 10rem; /* Adjust to align with the English section */
-    width: min(620px, 42vw);
+    flex: 1;
+    max-width: 560px;
 
     text-align: right;
     direction: rtl;
 
     color: rgba(255,255,255,.82);
     line-height: 1.9;
-}
 
-.about-ar h2 {
-    margin-bottom: .8rem;
-    font-size: .95rem;
-    text-transform: uppercase;
-    letter-spacing: .25em;
-    color: rgba(255,255,255,.55);
+    /* REMOVE these */
+    position: static;
 }
-
-.about-ar p {
-    margin: 0;
-    font-size: .95rem;
-}
-
-.about-ar blockquote {
-    margin-top: 1.4rem;
-    padding-right: 1rem;
-    border-right: 2px solid rgba(255,255,255,.25);
-    color: rgba(255,255,255,.95);
-    font-style: italic;
-}
-.about-wrapper{
-    margin-top:1rem;
-
-    width:min(1300px,90vw);
