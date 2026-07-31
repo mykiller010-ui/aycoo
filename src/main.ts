@@ -105,3 +105,19 @@ if (settings.autoplayOnFirstInteraction) {
   };
   window.addEventListener("pointerdown", kick, true);
 }
+
+
+
+
+const toggle = document.getElementById("profileToggle");
+const panel = document.getElementById("profilePanel");
+
+toggle.onclick = () => {
+
+    panel.classList.toggle("show");
+
+    toggle.textContent = panel.classList.contains("show")
+        ? "Hide Profile ▲"
+        : "Load Profile ▼";
+
+};
