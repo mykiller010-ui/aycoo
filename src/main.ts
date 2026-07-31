@@ -109,21 +109,20 @@ if (settings.autoplayOnFirstInteraction) {
 
 
 
-const toggle = document.getElementById("profileToggle") as HTMLButtonElement | null;
-const panel = document.getElementById("profilePanel") as HTMLElement | null;
+const observer = new IntersectionObserver((entries) => {
 
-if (!toggle || !panel) {
-    console.warn("Profile panel not found.");
-} else {
+    entries.forEach(entry => {
 
-    toggle.addEventListener("click", () => {
-
-        panel.classList.toggle("show");
-
-        toggle.textContent = panel.classList.contains("show")
-            ? "Hide Profile ▲"
-            : "Load Profile ▼";
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
 
     });
 
-}
+},{
+    threshold:0.15
+});
+
+document.querySelectorAll(".reveal").forEach(section=>{
+    observer.observe(section);
+});
