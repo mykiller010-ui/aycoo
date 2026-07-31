@@ -1002,3 +1002,28 @@ button {
     color: rgba(255,255,255,.95);
     font-style: italic;
 }
+/* Mobile & tablets (default) */
+.about-ar {
+    margin-top: 2rem;
+    direction: rtl;
+    text-align: right;
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .about-ar {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 520px;
+    }
+
+    .about {
+        width: 520px;
+    }
+
+    .identity {
+        position: relative;
+    }
+}
