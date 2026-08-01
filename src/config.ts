@@ -80,8 +80,8 @@ export const tracks: Track[] = [
 
 
 {
-  title: "Yagih Mael - Fly Me To The Moon",
-    src: "./music/yagih_mael_fly_me_to_the_moon.mp3",
+  title: "Echoes_Don’t_Leave",
+    src: "./music/Echoes_Don’t_Leave",
   
   },
   {
