@@ -89,8 +89,8 @@ export const tracks: Track[] = [
     src: "./music/Para_Qué_Me_Hiciste_Ben_Grant.mp3",
   },
   {
-    title: "Kudasai - Dream Of Her",
-    src: "./music/kudasai_dream_of_her.mp3",
+    title: "Y - yagih_mael_fly_me_to_the_moon",
+    src: "./music/yagih_mael_fly_me_to_the_moon.mp3",
   },
   {
     title: "Kudasai - The Girl I Haven't Met",
