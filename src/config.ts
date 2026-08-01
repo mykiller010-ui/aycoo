@@ -75,13 +75,13 @@ export const links: SocialLink[] = [
  
 ];
 
-//export const tracks: Track[] = [//
+export const tracks: Track[] = [
   
 
 
 {
   title: "H - Echoes_Don’t_Leave",
-    src: "./music/Echoes_Don’t_Leave.mp3",
+    src: "./music/11111111Echoes_Don’t_Leave.mp3",
   
   },
   {
