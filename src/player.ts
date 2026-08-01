@@ -1,4 +1,4 @@
-//import type { Track } from "./config";
+import type { Track } from "./config";
 
 const ICONS = {
   prev: "M6 6h2v12H6zm3.5 6l8.5 6V6l-8.5 6z",
