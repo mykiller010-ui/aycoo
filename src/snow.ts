@@ -1,90 +1,88 @@
-interface Flake {
-  x: number;
-  y: number;
-  r: number;
-  vy: number;
-  sway: number;
-  phase: number;
-  alpha: number;
+// src/snow.ts
+// Storm system scaffold
+
+export interface Drop {
+  x:number;
+  y:number;
+  length:number;
+  speed:number;
+  width:number;
+  alpha:number;
 }
 
 export function startSnow(canvas: HTMLCanvasElement): void {
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    canvas.remove();
-    return;
+  const ctx = canvas.getContext("2d");
+  if(!ctx) return;
+
+  let w=0,h=0;
+  let drops:Drop[]=[];
+  let wind=-140,targetWind=-140,windTimer=0;
+  let flash=0,nextFlash=6+Math.random()*10;
+
+  function createDrop(x:number,y:number):Drop{
+    const d=Math.random();
+    return {
+      x,y,
+      length:10+d*18,
+      speed:500+d*900,
+      width:0.7+d*0.9,
+      alpha:0.08+d*0.4
+    };
   }
 
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-
-  let w = 0;
-  let h = 0;
-  let flakes: Flake[] = [];
-
-  const spawn = (y?: number): Flake => {
-    const depth = Math.random(); // 0 = far, 1 = near
-    return {
-      x: Math.random() * w,
-      y: y ?? Math.random() * h,
-      r: 0.7 + depth * 2.4,
-      vy: 13 + depth * 44,
-      sway: 5 + depth * 15,
-      phase: Math.random() * Math.PI * 2,
-      alpha: 0.22 + depth * 0.5,
-    };
-  };
-
-  const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const count = Math.min(190, Math.round((w * h) / 14500));
-    flakes = Array.from({ length: count }, () => spawn());
-  };
-
+  function resize(){
+    const dpr=Math.min(devicePixelRatio||1,2);
+    w=innerWidth; h=innerHeight;
+    canvas.width=w*dpr; canvas.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    drops=Array.from({length:Math.min(900,Math.round(w*h/1800))},
+      ()=>createDrop(Math.random()*w,Math.random()*h));
+  }
+  addEventListener("resize",resize);
   resize();
-  window.addEventListener("resize", resize);
 
-  let last = performance.now();
-  let raf = 0;
+  let last=performance.now();
+  function frame(now:number){
+    const dt=Math.min(.04,(now-last)/1000); last=now;
 
-  const frame = (t: number) => {
-    const dt = Math.min(0.05, (t - last) / 1000);
-    last = t;
+    windTimer-=dt;
+    if(windTimer<=0){
+      windTimer=3+Math.random()*4;
+      targetWind=(-120+Math.random()*240);
+      if(Math.random()>0.75) targetWind*=2;
+    }
+    wind+=(targetWind-wind)*dt*0.6;
 
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = "#eef0f6";
+    nextFlash-=dt;
+    if(nextFlash<=0){
+      flash=1;
+      nextFlash=6+Math.random()*14;
+    }
+    flash*=0.9;
 
-    for (const f of flakes) {
-      f.y += f.vy * dt;
-      f.phase += dt * 0.9;
-      f.x += Math.sin(f.phase) * f.sway * dt;
+    ctx.clearRect(0,0,w,h);
 
-      if (f.y - f.r > h) Object.assign(f, spawn(-8));
-      if (f.x < -10) f.x = w + 10;
-      else if (f.x > w + 10) f.x = -10;
+    for(const d of drops){
+      d.x+=wind*dt;
+      d.y+=d.speed*dt;
+      if(d.y>h+40){ d.y=-30; d.x=Math.random()*w; }
+      if(d.x<-50)d.x=w+50;
+      if(d.x>w+50)d.x=-50;
 
-      ctx.globalAlpha = f.alpha;
       ctx.beginPath();
-      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.lineWidth=d.width;
+      ctx.strokeStyle=`rgba(185,215,255,${d.alpha})`;
+      ctx.moveTo(d.x,d.y);
+      ctx.lineTo(d.x-wind*0.03,d.y+d.length);
+      ctx.stroke();
     }
 
-    ctx.globalAlpha = 1;
-    raf = requestAnimationFrame(frame);
-  };
-
-  raf = requestAnimationFrame(frame);
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      cancelAnimationFrame(raf);
-    } else {
-      last = performance.now();
-      raf = requestAnimationFrame(frame);
+    if(flash>0.01){
+      ctx.fillStyle=`rgba(255,255,255,${flash*0.3})`;
+      ctx.fillRect(0,0,w,h);
     }
-  });
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 }
