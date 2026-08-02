@@ -80,30 +80,11 @@ export const tracks: Track[] = [
 
 
 {
-  title: "H - Echoes_Don’t_Leave",
-    src: "./music/11111111Echoes_Don’t_Leave.mp3",
+  title: "H - 222",
+    src: "./music/222.mp3",
   
   },
-  {
-    title: "P - Para_Qué_Me_Hiciste_Ben_Grant",
-    src: "./music/111Para_Qué_Me_Hiciste_Ben_Grant.mp3",
-  },
-  {
-    title: "Y - yagih_mael_fly_me_to_the_moon",
-    src: "./music/111yagih_mael_fly_me_to_the_moon.mp3",
-  },
-  {
-    title: "Kudasai - The Girl I Haven't Met",
-    src: "./music/111kudasai_the_girl_i_havent_met.mp3",
-  },
-  {
-    title: "Lovey - Ever Since",
-    src: "./music/111lovey_ever_since.mp3",
-  },
-  {
-     title: "Caleb Belkin - I Fall In Love Too Easily",
-    src: "./music/111caleb_belkin_i_fall_in_love_too_easily.mp3",
-  },
+ 
 ];
 
 export const slides: string[] = Array.from(
