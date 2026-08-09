@@ -1018,69 +1018,209 @@ button {
 
 
 
+/* =========================================================
+   DISCORD PROFILE PREVIEW
+   ========================================================= */
+
+.discord-profile {
+    position: relative;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: fit-content;
+    margin: 18px auto 0;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.discord-profile:hover {
+    transform: translateY(-2px);
+}
+
+.discord-avatar-wrapper {
+    position: relative;
+
+    width: 62px;
+    height: 62px;
+
+    flex-shrink: 0;
+}
+
+#discord-avatar {
+    position: absolute;
+    inset: 0;
+
+    width: 62px;
+    height: 62px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    background: #11141d;
+
+    border: 3px solid rgba(255,255,255,.08);
+
+    z-index: 1;
+}
+
+#discord-decoration {
+    position: absolute;
+
+    inset: -5px;
+
+    width: 72px;
+    height: 72px;
+
+    object-fit: contain;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+.discord-status {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+
+    border: 4px solid #11141d;
+
+    z-index: 5;
+}
+
+.discord-status.online {
+    background: #23a55a;
+}
+
+.discord-status.idle {
+    background: #f0b232;
+}
+
+.discord-status.dnd {
+    background: #f23f42;
+}
+
+.discord-status.offline {
+    background: #80848e;
+}
+
+.discord-info {
+    color: rgba(255,255,255,.65);
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
 
 /* =========================================================
-   DISCORD PROFILE POPUP
+   DISCORD SMALL POPUP
    ========================================================= */
 
 .discord-popup {
     position: fixed;
 
+    top: 50%;
+    left: 50%;
+
     width: 360px;
-    max-width: calc(100vw - 24px);
+    max-width: calc(100vw - 32px);
 
-    background: rgba(18, 18, 22, 0.97);
+    max-height: calc(100vh - 32px);
 
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: 16px;
+    overflow-y: auto;
 
-    overflow: hidden;
-
-    box-shadow:
-        0 24px 70px rgba(0, 0, 0, 0.65),
-        0 8px 30px rgba(0, 0, 0, 0.35);
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    z-index: 9999;
-
-    color: #fff;
+    transform:
+        translate(-50%, -50%)
+        scale(.94);
 
     opacity: 0;
-    transform: translateY(8px) scale(0.97);
 
     pointer-events: none;
 
+    z-index: 2147483647;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(25,28,38,.98),
+            rgba(12,14,21,.99)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.8),
+        0 0 50px rgba(120,160,255,.08);
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    color: white;
+
     transition:
-        opacity 0.18s ease,
-        transform 0.18s ease;
+        opacity .2s ease,
+        transform .25s cubic-bezier(.22,.61,.36,1);
 }
 
 
-/* Popup visible state */
+/* IMPORTANT:
+   hidden is controlled by JavaScript
+*/
 
-.discord-popup.show {
+.discord-popup[hidden] {
+    display: none;
+}
+
+
+/* Visible */
+
+.discord-popup.show,
+.discord-popup.open {
     opacity: 1;
-    transform: translateY(0) scale(1);
+
     pointer-events: auto;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
 }
 
 
 /* =========================================================
-   CLOSE BUTTON
+   POPUP CLOSE
    ========================================================= */
 
 .discord-popup-close {
     position: absolute;
 
-    top: 12px;
-    right: 12px;
+    top: 10px;
+    right: 10px;
 
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -1089,45 +1229,47 @@ button {
     border: 0;
     border-radius: 50%;
 
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0,0,0,.55);
 
-    color: rgba(255, 255, 255, 0.75);
+    color: white;
 
-    font-size: 22px;
+    font-size: 21px;
+
     line-height: 1;
 
     cursor: pointer;
 
-    z-index: 10;
+    z-index: 50;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+        background .2s ease,
+        transform .2s ease;
 }
 
 .discord-popup-close:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    background: rgba(255,255,255,.14);
+
     transform: scale(1.08);
 }
 
 
 /* =========================================================
-   BANNER
+   POPUP BANNER
    ========================================================= */
 
 .discord-popup-banner {
+    position: relative;
+
     width: 100%;
-    height: 110px;
+    height: 105px;
 
     overflow: hidden;
 
     background:
         linear-gradient(
             135deg,
-            rgba(45, 50, 70, 0.9),
-            rgba(12, 15, 25, 0.95)
+            #242a3a,
+            #11141d
         );
 }
 
@@ -1138,399 +1280,39 @@ button {
     display: block;
 
     object-fit: cover;
-
-    opacity: 0.9;
 }
 
 
 /* =========================================================
-   CONTENT
+   POPUP CONTENT
    ========================================================= */
 
 .discord-popup-content {
     position: relative;
 
-    padding: 58px 20px 22px;
+    padding:
+        52px
+        22px
+        22px;
 }
 
 
 /* =========================================================
-   AVATAR
+   POPUP AVATAR
    ========================================================= */
 
 .discord-popup-avatar {
     position: absolute;
 
-    top: -46px;
-    left: 20px;
-
-    width: 92px;
-    height: 92px;
-}
-
-.discord-popup-avatar img:first-child {
-    position: absolute;
-
-    inset: 0;
-
-    width: 92px;
-    height: 92px;
-
-    object-fit: cover;
-
-    border-radius: 50%;
-
-    border: 6px solid #121216;
-
-    background: #121216;
-
-    z-index: 1;
-}
-
-
-/* Avatar decoration */
-
-.discord-popup-decoration {
-    position: absolute;
-
-    inset: -8px;
-
-    width: 108px !important;
-    height: 108px !important;
-
-    object-fit: contain !important;
-
-    border: 0 !important;
-
-    background: transparent !important;
-
-    z-index: 2;
-
-    pointer-events: none;
-}
-
-
-/* Status */
-
-.discord-popup-status {
-    position: absolute;
-
-    right: 1px;
-    bottom: 1px;
-
-    width: 22px;
-    height: 22px;
-
-    border-radius: 50%;
-
-    border: 5px solid #121216;
-
-    z-index: 3;
-
-    background: #747f8d;
-}
-
-.discord-popup-status.online {
-    background: #23a55a;
-}
-
-.discord-popup-status.idle {
-    background: #f0b232;
-}
-
-.discord-popup-status.dnd {
-    background: #f23f43;
-}
-
-.discord-popup-status.offline {
-    background: #80848e;
-}
-
-
-/* =========================================================
-   NAME
-   ========================================================= */
-
-.discord-popup-name {
-    font-size: 21px;
-
-    font-weight: 700;
-
-    line-height: 1.2;
-
-    letter-spacing: -0.02em;
-
-    color: #fff;
-}
-
-
-/* =========================================================
-   USERNAME
-   ========================================================= */
-
-.discord-popup-username {
-    margin-top: 4px;
-
-    font-size: 14px;
-
-    color: rgba(255, 255, 255, 0.55);
-}
-
-
-/* =========================================================
-   SEPARATOR
-   ========================================================= */
-
-.discord-popup-line {
-    height: 1px;
-
-    margin: 18px 0;
-
-    background: rgba(255, 255, 255, 0.08);
-}
-
-
-/* =========================================================
-   SECTIONS
-   ========================================================= */
-
-.discord-popup-section {
-    margin-top: 18px;
-}
-
-.discord-popup-section:first-of-type {
-    margin-top: 0;
-}
-
-.discord-popup-section h4 {
-    margin: 0 0 8px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.08em;
-
-    color: rgba(255, 255, 255, 0.55);
-}
-
-.discord-popup-section p {
-    margin: 0;
-
-    font-size: 13px;
-
-    line-height: 1.55;
-
-    color: rgba(255, 255, 255, 0.85);
-
-    word-break: break-word;
-}
-
-
-/* =========================================================
-   HIDDEN STATE
-   ========================================================= */
-
-.discord-popup[hidden] {
-    display: none;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    .discord-popup {
-        width: calc(100vw - 24px);
-
-        max-height: calc(100vh - 24px);
-
-        overflow-y: auto;
-    }
-
-    .discord-popup-banner {
-        height: 95px;
-    }
-
-    .discord-popup-content {
-        padding: 54px 18px 20px;
-    }
-
-}
-
-
-
-/* =====================================================
-   DISCORD POPUP
-   ===================================================== */
-
-.discord-popup {
-    position: fixed;
-    inset: 0;
-
-    z-index: 99999;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
-
-    background: rgba(0, 0, 0, 0.18);
-
-    opacity: 0;
-    pointer-events: none;
-
-    transition:
-        opacity .25s ease;
-}
-
-.discord-popup.open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-
-/* =====================================================
-   CARD
-   ===================================================== */
-
-.discord-popup-card {
-    position: relative;
-
-    width: min(380px, calc(100vw - 40px));
-    max-height: min(620px, calc(100vh - 40px));
-
-    overflow: hidden;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(17, 20, 29, .96),
-            rgba(9, 11, 18, .98)
-        );
-
-    border: 1px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.65),
-        0 0 40px rgba(120,170,255,.08);
-
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-
-    transform:
-        translateY(15px)
-        scale(.96);
-
-    transition:
-        transform .3s cubic-bezier(.22,.61,.36,1);
-}
-
-.discord-popup.open .discord-popup-card {
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-
-/* =====================================================
-   CLOSE
-   ===================================================== */
-
-.discord-popup-close {
-    position: absolute;
-
-    top: 12px;
-    right: 12px;
-
-    z-index: 20;
-
-    width: 34px;
-    height: 34px;
-
-    border: 0;
-    border-radius: 50%;
-
-    background: rgba(0,0,0,.55);
-
-    color: white;
-
-    font-size: 22px;
-    line-height: 1;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        transform .2s ease;
-}
-
-.discord-popup-close:hover {
-    background: rgba(255,255,255,.15);
-    transform: scale(1.08);
-}
-
-
-/* =====================================================
-   BANNER
-   ===================================================== */
-
-.discord-popup-banner {
-    height: 105px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(90,120,180,.35),
-            rgba(15,18,30,.9)
-        );
-
-    overflow: hidden;
-}
-
-.discord-popup-banner-overlay {
-    width: 100%;
-    height: 100%;
-
-    background:
-        radial-gradient(
-            circle at 70% 30%,
-            rgba(130,170,255,.16),
-            transparent 45%
-        );
-}
-
-
-/* =====================================================
-   CONTENT
-   ===================================================== */
-
-.discord-popup-content {
-    position: relative;
-
-    padding: 0 24px 24px;
-}
-
-
-/* =====================================================
-   AVATAR
-   ===================================================== */
-
-.discord-popup-avatar {
-    position: relative;
+    top: -44px;
+    left: 22px;
 
     width: 88px;
     height: 88px;
-
-    margin-top: -44px;
-
-    margin-bottom: 12px;
 }
+
+
+/* Actual avatar */
 
 .discord-popup-avatar > img:first-child {
     position: absolute;
@@ -1540,14 +1322,19 @@ button {
     width: 88px;
     height: 88px;
 
-    border-radius: 50%;
-
     object-fit: cover;
+
+    border-radius: 50%;
 
     border: 5px solid #11141d;
 
+    background: #11141d;
+
     z-index: 2;
 }
+
+
+/* Decoration */
 
 .discord-popup-avatar > img:nth-child(2) {
     position: absolute;
@@ -1564,11 +1351,14 @@ button {
     pointer-events: none;
 }
 
+
+/* Status */
+
 .discord-popup-status {
     position: absolute;
 
-    right: 3px;
-    bottom: 3px;
+    right: 2px;
+    bottom: 2px;
 
     width: 19px;
     height: 19px;
@@ -1577,7 +1367,7 @@ button {
 
     border: 4px solid #11141d;
 
-    z-index: 5;
+    z-index: 10;
 }
 
 .discord-popup-status.online {
@@ -1597,46 +1387,48 @@ button {
 }
 
 
-/* =====================================================
+/* =========================================================
    NAME
-   ===================================================== */
+   ========================================================= */
 
 .discord-popup-name {
-    font-size: 22px;
+    font-size: 21px;
 
     font-weight: 700;
 
-    color: white;
+    line-height: 1.2;
 
-    letter-spacing: .02em;
+    color: white;
 }
 
 .discord-popup-username {
-    margin-top: 3px;
-
-    color: rgba(255,255,255,.48);
+    margin-top: 4px;
 
     font-size: 13px;
+
+    color: rgba(255,255,255,.48);
 }
 
 
-/* =====================================================
-   LINE
-   ===================================================== */
+/* =========================================================
+   SEPARATOR
+   ========================================================= */
 
 .discord-popup-line {
+    width: 100%;
+
     height: 1px;
 
     margin: 18px 0;
 
     background:
-        rgba(255,255,255,.08);
+        rgba(255,255,255,.09);
 }
 
 
-/* =====================================================
+/* =========================================================
    SECTIONS
-   ===================================================== */
+   ========================================================= */
 
 .discord-popup-section {
     margin-bottom: 18px;
@@ -1647,41 +1439,52 @@ button {
 
     font-size: 10px;
 
+    font-weight: 700;
+
     letter-spacing: .16em;
 
-    color: rgba(255,255,255,.45);
+    color: rgba(255,255,255,.42);
 }
 
 .discord-popup-section p {
     margin: 0;
 
-    color: rgba(255,255,255,.82);
-
     font-size: 13px;
 
     line-height: 1.6;
+
+    color: rgba(255,255,255,.82);
+
+    word-break: break-word;
 }
 
 
-/* =====================================================
+/* =========================================================
    MOBILE
-   ===================================================== */
+   ========================================================= */
 
 @media (max-width: 600px) {
 
     .discord-popup {
-        align-items: flex-end;
+        width: calc(100vw - 24px);
 
-        padding: 12px;
+        max-height: calc(100vh - 24px);
+
+        border-radius: 16px;
     }
 
-    .discord-popup-card {
-        width: 100%;
-
-        max-height: 75vh;
-
-        border-radius: 18px 18px 14px 14px;
+    .discord-popup-banner {
+        height: 90px;
     }
+
+    .discord-popup-content {
+        padding:
+            52px
+            18px
+            20px;
+    }
+
+}
 
 }
 
