@@ -1,243 +1,481 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+
   <title>影 - AYcoo</title>
-  <meta name="description" content="Hobbyist developer, network engineer, music enthusiast,artest love painting, and co-op gamer" />
+
+  <meta
+    name="description"
+    content="Hobbyist developer, network engineer, music enthusiast, artist who loves painting, and co-op gamer"
+  />
+
   <meta name="theme-color" content="#090b14" />
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="canonical" href="https://aycoo.vip//" />
+
+  <link
+    rel="canonical"
+    href="https://aycoo.vip/"
+  />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="aycoo.vip" />
   <meta property="og:url" content="https://aycoo.vip/" />
   <meta property="og:title" content="影 - AYcoo" />
-  <meta property="og:description" content="Hobbyist developer, network engineer, music enthusiast,artest love painting, and co-op gamer." />
-  <meta property="og:image" content="https://aycoo.vip/og.jpg" />
+
+  <meta
+    property="og:description"
+    content="Hobbyist developer, network engineer, music enthusiast, artist who loves painting, and co-op gamer."
+  />
+
+  <meta
+    property="og:image"
+    content="https://aycoo.vip/og.jpg"
+  />
+
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
 
-  <script type="module" src="/src/main.ts"></script>
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <script
+    type="module"
+    src="/src/main.ts"
+  ></script>
 </head>
 
+
 <body>
-  <div class="bg" id="bg" aria-hidden="true">
+
+  <!-- =========================================================
+       BACKGROUND
+       ========================================================= -->
+
+  <div
+    class="bg"
+    id="bg"
+    aria-hidden="true"
+  >
     <div class="bg-layer"></div>
     <div class="bg-layer"></div>
     <div class="bg-scrim"></div>
     <div class="bg-veil"></div>
   </div>
 
-  <canvas class="snow" id="snow" aria-hidden="true"></canvas>
-  <div class="grain" aria-hidden="true"></div>
 
-  <main class="scene">
-    <div class="identity" id="tilt">
-      <p class="kanji" id="kanji" lang="ja" data-depth="3">影</p>
-      <h1 class="name" id="name" data-depth="2">AYcoo</h1>
-  <div class="rule" data-depth="1.5" aria-hidden="true"></div>
-      <p class="tagline" id="tagline" data-depth="1.5" hidden></p>
-      <nav class="links" id="links" data-depth="1" aria-label="Social links"></nav>
+  <!-- =========================================================
+       RAIN / STORM CANVAS
+       ========================================================= -->
 
-<div class="discord-profile" id="discord-profile" data-depth="0.5">
- <div class="discord-avatar-wrapper">
-  <img id="discord-avatar" alt="Discord avatar" />
-  <img id="discord-decoration" alt="" />
-  <span id="discord-status" class="discord-status"></span>
-</div>
-  <div class="discord-info">
-    <span id="discord-presence">Loading...</span>
-  </div>
-</div>
-
-      <!-- Discord Profile Modal -->
-<div
-  class="discord-modal"
-  id="discord-modal"
-  aria-hidden="true"
->
-  <div class="discord-modal-backdrop" id="discord-modal-backdrop"></div>
+  <canvas
+    class="snow"
+    id="snow"
+    aria-hidden="true"
+  ></canvas>
 
   <div
-    class="discord-modal-card"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Discord profile"
-  >
+    class="grain"
+    aria-hidden="true"
+  ></div>
 
-    <button
-      class="discord-modal-close"
-      id="discord-modal-close"
-      type="button"
-      aria-label="Close profile"
+
+  <!-- =========================================================
+       MAIN CONTENT
+       ========================================================= -->
+
+  <main class="scene">
+
+    <div
+      class="identity"
+      id="tilt"
     >
-      ×
-    </button>
 
-    <!-- Banner -->
-    <div class="discord-modal-banner">
-      <img
-        id="discord-modal-banner"
-        alt=""
-      />
-    </div>
+      <!-- Japanese name -->
+      <p
+        class="kanji"
+        id="kanji"
+        lang="ja"
+        data-depth="3"
+      >
+        影
+      </p>
 
-    <!-- Profile -->
-    <div class="discord-modal-profile">
 
-      <div class="discord-modal-avatar">
-        <img
-          id="discord-modal-avatar"
-          alt="Discord avatar"
-        />
+      <!-- Name -->
+      <h1
+        class="name"
+        id="name"
+        data-depth="2"
+      >
+        AYcoo
+      </h1>
 
-        <img
-          id="discord-modal-decoration"
-          alt=""
-        />
 
-        <span
-          id="discord-modal-status"
-          class="discord-modal-status"
-        ></span>
+      <!-- Divider -->
+      <div
+        class="rule"
+        data-depth="1.5"
+        aria-hidden="true"
+      ></div>
+
+
+      <!-- Tagline -->
+      <p
+        class="tagline"
+        id="tagline"
+        data-depth="1.5"
+        hidden
+      ></p>
+
+
+      <!-- Social links -->
+      <nav
+        class="links"
+        id="links"
+        data-depth="1"
+        aria-label="Social links"
+      ></nav>
+
+
+      <!-- =====================================================
+           DISCORD PROFILE PREVIEW
+           Clicking this will eventually open the full profile
+           ===================================================== -->
+
+      <div
+        class="discord-profile"
+        id="discord-profile"
+        data-depth="0.5"
+      >
+
+        <div class="discord-avatar-wrapper">
+
+          <img
+            id="discord-avatar"
+            alt="Discord avatar"
+          />
+
+          <img
+            id="discord-decoration"
+            alt=""
+          />
+
+          <span
+            id="discord-status"
+            class="discord-status"
+          ></span>
+
+        </div>
+
+
+        <div class="discord-info">
+
+          <span
+            id="discord-presence"
+          >
+            Loading...
+          </span>
+
+        </div>
+
       </div>
 
-      <div class="discord-modal-identity">
 
-        <div class="discord-modal-name-row">
+      <!-- =====================================================
+           DISCORD FULL PROFILE MODAL
+           Hidden until Discord profile is clicked
+           ===================================================== -->
 
-          <h2 id="discord-modal-name">
-            AYcoo
-          </h2>
+      <div
+        class="discord-modal"
+        id="discord-modal"
+        aria-hidden="true"
+      >
 
-          <div
-            id="discord-modal-badges"
-            class="discord-modal-badges"
-          ></div>
+        <!-- Dark background behind popup -->
+        <div
+          class="discord-modal-backdrop"
+          id="discord-modal-backdrop"
+        ></div>
 
-        </div>
+
+        <!-- =================================================
+             PROFILE CARD
+             ================================================= -->
 
         <div
-          id="discord-modal-username"
-          class="discord-modal-username"
+          class="discord-modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Discord profile"
         >
-          @aycoo
+
+
+          <!-- Close button -->
+
+          <button
+            class="discord-modal-close"
+            id="discord-modal-close"
+            type="button"
+            aria-label="Close profile"
+          >
+            ×
+          </button>
+
+
+          <!-- =================================================
+               DISCORD BANNER
+               ================================================= -->
+
+          <div class="discord-modal-banner">
+
+            <img
+              id="discord-modal-banner"
+              alt=""
+            />
+
+          </div>
+
+
+          <!-- =================================================
+               PROFILE HEADER
+               ================================================= -->
+
+          <div class="discord-modal-profile">
+
+
+            <!-- Avatar -->
+
+            <div class="discord-modal-avatar">
+
+              <img
+                id="discord-modal-avatar"
+                alt="Discord avatar"
+              />
+
+              <img
+                id="discord-modal-decoration"
+                alt=""
+              />
+
+              <span
+                id="discord-modal-status"
+                class="discord-modal-status"
+              ></span>
+
+            </div>
+
+
+            <!-- Name / username -->
+
+            <div class="discord-modal-identity">
+
+              <div class="discord-modal-name-row">
+
+                <h2
+                  id="discord-modal-name"
+                >
+                  AYcoo
+                </h2>
+
+
+                <div
+                  id="discord-modal-badges"
+                  class="discord-modal-badges"
+                ></div>
+
+              </div>
+
+
+              <div
+                id="discord-modal-username"
+                class="discord-modal-username"
+              >
+                @aycoo
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               PROFILE BODY
+               ================================================= -->
+
+          <div class="discord-modal-body">
+
+
+            <!-- ABOUT ME -->
+
+            <section
+              class="discord-modal-section"
+              id="discord-modal-about-section"
+            >
+
+              <h3>
+                ABOUT ME
+              </h3>
+
+              <p
+                id="discord-modal-about"
+              >
+                Loading...
+              </p>
+
+            </section>
+
+
+            <!-- CUSTOM STATUS -->
+
+            <section
+              class="discord-modal-section"
+              id="discord-modal-status-section"
+            >
+
+              <h3>
+                STATUS
+              </h3>
+
+              <p
+                id="discord-modal-custom-status"
+              >
+                -
+              </p>
+
+            </section>
+
+
+            <!-- ACTIVITY -->
+
+            <section
+              class="discord-modal-section"
+              id="discord-modal-activity-section"
+            >
+
+              <h3>
+                ACTIVITY
+              </h3>
+
+              <div
+                id="discord-modal-activity"
+                class="discord-modal-activity"
+              >
+                No activity
+              </div>
+
+            </section>
+
+
+          </div>
+
         </div>
 
       </div>
 
+
+      <!-- =====================================================
+           ABOUT ME - ENGLISH
+           ===================================================== -->
+
+      <section
+        class="about"
+        data-depth="0.5"
+      >
+
+        <h2>
+          About Me
+        </h2>
+
+        <p>
+          Hobbyist developer and network engineer.
+          I enjoy understanding how things work, not just using them.
+          I prefer building my own solutions instead of relying on someone else's.
+          I like optimizing everything—from networks to websites to game servers.
+          I pay attention to small visual details that most people overlook.
+          I keep learning by experimenting rather than following tutorials step by step.
+        </p>
+
+      </section>
+
+
+      <!-- =====================================================
+           ABOUT ME - ARABIC
+           ===================================================== -->
+
+      <section
+        class="about about-ar"
+        data-depth="0.5"
+        lang="ar"
+        dir="rtl"
+      >
+
+        <h2>
+          عني
+        </h2>
+
+        <p>
+          مطور ومهندس شبكات هاوٍ، أستمتع بفهم كيفية عمل الأشياء، وليس مجرد استخدامها.
+          أفضل بناء حلولي الخاصة بدلاً من الاعتماد على حلول الآخرين.
+          أحب تحسين كل شيء، من الشبكات والمواقع إلى خوادم الألعاب.
+          أهتم بالتفاصيل البصرية الصغيرة التي قد لا يلاحظها معظم الناس.
+          وأواصل التعلم من خلال التجربة والاستكشاف بدلاً من اتباع الشروحات خطوة بخطوة.
+        </p>
+
+      </section>
+
+
     </div>
 
-    <!-- Body -->
-    <div class="discord-modal-body">
-
-      <section
-        class="discord-modal-section"
-        id="discord-modal-about-section"
-      >
-        <h3>ABOUT ME</h3>
-
-        <p id="discord-modal-about">
-          Loading...
-        </p>
-      </section>
-
-      <section
-        class="discord-modal-section"
-        id="discord-modal-status-section"
-      >
-        <h3>STATUS</h3>
-
-        <p id="discord-modal-custom-status">
-          -
-        </p>
-      </section>
-
-      <section
-        class="discord-modal-section"
-        id="discord-modal-activity-section"
-      >
-        <h3>ACTIVITY</h3>
-
-        <div
-          id="discord-modal-activity"
-          class="discord-modal-activity"
-        >
-          No activity
-        </div>
-      </section>
-
-    </div>
-
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-<section class="about" data-depth="0.5">
-  <h2>About Me</h2>
-
-  <p>
-     Hobbyist developer and network engineer.I enjoy understanding how things work, not just using them.
-    I prefer building my own solutions instead of relying on someone else's.
-    I like optimizing everything—from networks to websites to game servers.
-    I pay attention to small visual details that most people overlook.
-    I keep learning by experimenting rather than following tutorials step by step.
-  </p>
-
-
-</section>
-      <section class="about about-ar" data-depth="0.5" lang="ar" dir="rtl">
-  <h2>عني</h2>
-
-  <p>
-     مطور ومهندس شبكات هاوٍ، أستمتع بفهم كيفية عمل الأشياء، وليس مجرد استخدامها.
-    أفضل بناء حلولي الخاصة بدلاً من الاعتماد على حلول الآخرين.
-    أحب تحسين كل شيء، من الشبكات والمواقع إلى خوادم الألعاب.
-    أهتم بالتفاصيل البصرية الصغيرة التي قد لا يلاحظها معظم الناس.
-    وأواصل التعلم من خلال التجربة والاستكشاف بدلاً من اتباع الشروحات خطوة بخطوة.
-  </p>
-
-
-</section>
-      
-
-
-
-      
-
-
-</div>
-
-    
   </main>
 
-  <footer class="player" id="player" aria-label="Music player"></footer>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- =========================================================
+       MUSIC PLAYER
+       ========================================================= -->
+
+  <footer
+    class="player"
+    id="player"
+    aria-label="Music player"
+  ></footer>
+
+
+  <!-- =========================================================
+       TOAST
+       ========================================================= -->
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <!-- =========================================================
+       NO JAVASCRIPT MESSAGE
+       ========================================================= -->
 
   <noscript>
+
     <p class="noscript">
-      The site relies heavily on JavaScript, so it won't work properly without it. Please enable JavaScript and reload
-      the page.
+      The site relies heavily on JavaScript,
+      so it won't work properly without it.
+      Please enable JavaScript and reload the page.
     </p>
-    
+
   </noscript>
+
 </body>
 
 </html>
