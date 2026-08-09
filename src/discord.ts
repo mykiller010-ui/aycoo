@@ -1,613 +1,345 @@
 const DISCORD_ID = "229072391521697792";
 
 interface DiscordUser {
-    id: string;
-    username: string;
-    global_name?: string;
-    avatar: string | null;
-    avatar_decoration_data?: {
-        asset: string;
-        sku_id?: string;
-    } | null;
+  id: string;
+  username: string;
+  global_name?: string;
+  avatar: string | null;
+  avatar_decoration_data?: {
+    asset: string;
+    sku_id?: string;
+  } | null;
 }
 
 interface LanyardResponse {
-    success: boolean;
-    data: {
-        discord_status: "online" | "idle" | "dnd" | "offline";
-        discord_user: DiscordUser;
-        activities?: DiscordActivity[];
-    };
+  success: boolean;
+  data: {
+    discord_status: "online" | "idle" | "dnd" | "offline";
+    discord_user: DiscordUser;
+    activities: Array<{
+      name: string;
+      type: number;
+      state?: string;
+      details?: string;
+    }>;
+    spotify?: {
+      song: string;
+      artist: string;
+      album_art_url: string;
+    } | null;
+  };
 }
-
-interface DiscordActivity {
-    name?: string;
-    type?: number;
-    details?: string;
-    state?: string;
-    assets?: {
-        large_image?: string;
-        large_text?: string;
-        small_image?: string;
-        small_text?: string;
-    };
-}
-
-interface DiscordProfileData {
-    user: DiscordUser;
-    status: "online" | "idle" | "dnd" | "offline";
-    activities: DiscordActivity[];
-}
-
-
-/* =========================================================
-   HELPERS
-   ========================================================= */
-
-function getElement<T extends HTMLElement>(
-    selector: string,
-): T | null {
-    return document.querySelector(selector) as T | null;
-}
-
-
-function getAvatarUrl(
-    user: DiscordUser,
-    size = 256,
-): string {
-
-    if (!user.avatar) {
-        return "";
-    }
-
-    const extension =
-        user.avatar.startsWith("a_")
-            ? "gif"
-            : "png";
-
-    return (
-        `https://cdn.discordapp.com/avatars/` +
-        `${user.id}/${user.avatar}.${extension}?size=${size}`
-    );
-}
-
-
-function getDecorationUrl(
-    user: DiscordUser,
-): string {
-
-    const asset =
-        user.avatar_decoration_data?.asset;
-
-    if (!asset) {
-        return "";
-    }
-
-    return (
-        `https://cdn.discordapp.com/` +
-        `avatar-decoration-presets/` +
-        `${asset}.png?size=256`
-    );
-}
-
-
-function statusName(
-    status: DiscordProfileData["status"],
-): string {
-
-    const names = {
-        online: "Online",
-        idle: "Idle",
-        dnd: "Do Not Disturb",
-        offline: "Offline",
-    };
-
-    return names[status];
-}
-
-
-/* =========================================================
-   MODAL
-   ========================================================= */
-
-function initDiscordModal(
-    profileData: DiscordProfileData,
-): void {
-
-    const profile =
-        getElement<HTMLElement>("#discord-profile");
-
-    const modal =
-        getElement<HTMLElement>("#discord-modal");
-
-    const closeButton =
-        getElement<HTMLButtonElement>(
-            "#discord-modal-close",
-        );
-
-    const backdrop =
-        getElement<HTMLElement>(
-            "#discord-modal-backdrop",
-        );
-
-    if (!profile || !modal || !closeButton) {
-        return;
-    }
-
-
-    /* -----------------------------------------------------
-       Elements
-       ----------------------------------------------------- */
-
-    const modalAvatar =
-        getElement<HTMLImageElement>(
-            "#discord-modal-avatar",
-        );
-
-    const modalDecoration =
-        getElement<HTMLImageElement>(
-            "#discord-modal-decoration",
-        );
-
-    const modalStatus =
-        getElement<HTMLElement>(
-            "#discord-modal-status",
-        );
-
-    const modalName =
-        getElement<HTMLElement>(
-            "#discord-modal-name",
-        );
-
-    const modalUsername =
-        getElement<HTMLElement>(
-            "#discord-modal-username",
-        );
-
-    const modalAbout =
-        getElement<HTMLElement>(
-            "#discord-modal-about",
-        );
-
-    const modalCustomStatus =
-        getElement<HTMLElement>(
-            "#discord-modal-custom-status",
-        );
-
-    const modalActivity =
-        getElement<HTMLElement>(
-            "#discord-modal-activity",
-        );
-
-
-    /* -----------------------------------------------------
-       Fill profile
-       ----------------------------------------------------- */
-
-    const user =
-        profileData.user;
-
-
-    if (modalAvatar) {
-
-        const url =
-            getAvatarUrl(user, 512);
-
-        if (url) {
-            modalAvatar.src = url;
-        }
-    }
-
-
-    if (modalDecoration) {
-
-        const url =
-            getDecorationUrl(user);
-
-        if (url) {
-
-            modalDecoration.src = url;
-            modalDecoration.hidden = false;
-
-        } else {
-
-            modalDecoration.hidden = true;
-        }
-    }
-
-
-    if (modalName) {
-
-        modalName.textContent =
-            user.global_name ||
-            user.username;
-    }
-
-
-    if (modalUsername) {
-
-        modalUsername.textContent =
-            `@${user.username}`;
-    }
-
-
-    if (modalStatus) {
-
-        modalStatus.className =
-            `discord-modal-status ${profileData.status}`;
-
-        modalStatus.title =
-            statusName(profileData.status);
-    }
-
-
-    /*
-     * Lanyard's basic endpoint does not provide
-     * a full Discord "About Me" field.
-     *
-     * So don't invent one.
-     */
-    if (modalAbout) {
-
-        modalAbout.textContent =
-            "Hobbyist developer and network engineer.";
-    }
-
-
-    /* -----------------------------------------------------
-       Activity
-       ----------------------------------------------------- */
-
-    const activities =
-        profileData.activities.filter(
-            activity =>
-                activity.name &&
-                activity.name !== "Custom Status",
-        );
-
-
-    if (modalActivity) {
-
-        if (activities.length === 0) {
-
-            modalActivity.textContent =
-                "No activity";
-
-        } else {
-
-            modalActivity.innerHTML = "";
-
-            for (const activity of activities) {
-
-                const item =
-                    document.createElement("div");
-
-                item.className =
-                    "discord-modal-activity-item";
-
-
-                const title =
-                    document.createElement("strong");
-
-                title.textContent =
-                    activity.name || "Activity";
-
-                item.append(title);
-
-
-                if (activity.details) {
-
-                    const details =
-                        document.createElement("div");
-
-                    details.textContent =
-                        activity.details;
-
-                    item.append(details);
-                }
-
-
-                if (activity.state) {
-
-                    const state =
-                        document.createElement("div");
-
-                    state.textContent =
-                        activity.state;
-
-                    item.append(state);
-                }
-
-
-                modalActivity.append(item);
-            }
-        }
-    }
-
-
-    /* -----------------------------------------------------
-       Status
-       ----------------------------------------------------- */
-
-    if (modalCustomStatus) {
-
-        const customStatus =
-            profileData.activities.find(
-                activity =>
-                    activity.name ===
-                    "Custom Status",
-            );
-
-        if (
-            customStatus?.state ||
-            customStatus?.details
-        ) {
-
-            modalCustomStatus.textContent =
-                customStatus.state ||
-                customStatus.details ||
-                "-";
-
-        } else {
-
-            modalCustomStatus.textContent =
-                statusName(profileData.status);
-        }
-    }
-
-
-    /* -----------------------------------------------------
-       Open
-       ----------------------------------------------------- */
-
-    const openModal = (): void => {
-
-        modal.classList.add("open");
-
-        document.body.classList.add(
-            "discord-modal-open",
-        );
-
-        closeButton.focus();
-    };
-
-
-    /* -----------------------------------------------------
-       Close
-       ----------------------------------------------------- */
-
-    const closeModal = (): void => {
-
-        modal.classList.remove("open");
-
-        document.body.classList.remove(
-            "discord-modal-open",
-        );
-    };
-
-
-    /* -----------------------------------------------------
-       Click avatar
-       ----------------------------------------------------- */
-
-    profile.addEventListener(
-        "click",
-        (event) => {
-
-            const target =
-                event.target as HTMLElement;
-
-            /*
-             * Don't accidentally open the modal
-             * when clicking something inside the
-             * profile that later becomes interactive.
-             */
-            if (
-                target.closest(
-                    "a, button",
-                )
-            ) {
-                return;
-            }
-
-            openModal();
-        },
-    );
-
-
-    /* -----------------------------------------------------
-       Close button
-       ----------------------------------------------------- */
-
-    closeButton.addEventListener(
-        "click",
-        closeModal,
-    );
-
-
-    /* -----------------------------------------------------
-       Backdrop
-       ----------------------------------------------------- */
-
-    if (backdrop) {
-
-        backdrop.addEventListener(
-            "click",
-            closeModal,
-        );
-    }
-
-
-    /* -----------------------------------------------------
-       Escape
-       ----------------------------------------------------- */
-
-    document.addEventListener(
-        "keydown",
-        (event) => {
-
-            if (
-                event.key === "Escape" &&
-                modal.classList.contains("open")
-            ) {
-                closeModal();
-            }
-        },
-    );
-}
-
-
-/* =========================================================
-   DISCORD
-   ========================================================= */
 
 export async function initDiscord(): Promise<void> {
+  const profile = document.querySelector(
+    "#discord-profile",
+  ) as HTMLElement | null;
 
-    const avatar =
-        document.querySelector(
-            "#discord-avatar",
-        ) as HTMLImageElement | null;
+  const avatar = document.querySelector(
+    "#discord-avatar",
+  ) as HTMLImageElement | null;
 
-    const decoration =
-        document.querySelector(
-            "#discord-decoration",
-        ) as HTMLImageElement | null;
+  const decoration = document.querySelector(
+    "#discord-decoration",
+  ) as HTMLImageElement | null;
 
-    const presence =
-        document.querySelector(
-            "#discord-presence",
-        ) as HTMLElement | null;
+  const presence = document.querySelector(
+    "#discord-presence",
+  ) as HTMLElement | null;
 
-    const status =
-        document.querySelector(
-            "#discord-status",
-        ) as HTMLElement | null;
+  const status = document.querySelector(
+    "#discord-status",
+  ) as HTMLElement | null;
 
+  if (!profile || !avatar || !decoration || !presence || !status) {
+    console.warn("Discord profile elements not found.");
+    return;
+  }
 
-    if (
-        !avatar ||
-        !decoration ||
-        !presence ||
-        !status
-    ) {
-        return;
+  /*
+   * =========================================================
+   * POPUP ELEMENTS
+   * =========================================================
+   */
+
+  const popup = document.querySelector(
+    "#discord-popup",
+  ) as HTMLElement | null;
+
+  const popupClose = document.querySelector(
+    "#discord-popup-close",
+  ) as HTMLButtonElement | null;
+
+  const popupAvatar = document.querySelector(
+    "#discord-popup-avatar",
+  ) as HTMLImageElement | null;
+
+  const popupDecoration = document.querySelector(
+    "#discord-popup-decoration",
+  ) as HTMLImageElement | null;
+
+  const popupStatus = document.querySelector(
+    "#discord-popup-status",
+  ) as HTMLElement | null;
+
+  const popupName = document.querySelector(
+    "#discord-popup-name",
+  ) as HTMLElement | null;
+
+  const popupUsername = document.querySelector(
+    "#discord-popup-username",
+  ) as HTMLElement | null;
+
+  const popupAbout = document.querySelector(
+    "#discord-popup-about",
+  ) as HTMLElement | null;
+
+  const popupStatusText = document.querySelector(
+    "#discord-popup-status-text",
+  ) as HTMLElement | null;
+
+  const popupActivity = document.querySelector(
+    "#discord-popup-activity",
+  ) as HTMLElement | null;
+
+  /*
+   * =========================================================
+   * OPEN / CLOSE POPUP
+   * =========================================================
+   */
+
+  function openPopup(): void {
+    if (!popup) return;
+
+    popup.classList.add("open");
+    popup.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("discord-popup-open");
+  }
+
+  function closePopup(): void {
+    if (!popup) return;
+
+    popup.classList.remove("open");
+    popup.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("discord-popup-open");
+  }
+
+  /*
+   * CLICK DISCORD PROFILE
+   */
+
+  profile.addEventListener("click", () => {
+    openPopup();
+  });
+
+  /*
+   * CLOSE BUTTON
+   */
+
+  popupClose?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    closePopup();
+  });
+
+  /*
+   * CLICK OUTSIDE POPUP
+   */
+
+  popup?.addEventListener("click", (event) => {
+    if (event.target === popup) {
+      closePopup();
+    }
+  });
+
+  /*
+   * ESC KEY
+   */
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closePopup();
+    }
+  });
+
+  /*
+   * =========================================================
+   * LOAD DISCORD
+   * =========================================================
+   */
+
+  try {
+    const response = await fetch(
+      `https://api.lanyard.rest/v1/users/${DISCORD_ID}`,
+    );
+
+    if (!response.ok) {
+      throw new Error(`Discord API returned ${response.status}`);
     }
 
+    const result = (await response.json()) as LanyardResponse;
 
-    try {
+    if (!result.success) {
+      throw new Error("Lanyard request failed.");
+    }
 
-        const response =
-            await fetch(
-                `https://api.lanyard.rest/v1/users/${DISCORD_ID}`,
-            );
+    const data = result.data;
+    const user = data.discord_user;
 
+    /*
+     * =======================================================
+     * STATUS
+     * =======================================================
+     */
 
-        if (!response.ok) {
+    const statusNames: Record<string, string> = {
+      online: "Online",
+      idle: "Idle",
+      dnd: "Do Not Disturb",
+      offline: "Offline",
+    };
 
-            throw new Error(
-                `Discord request failed: ${response.status}`,
-            );
-        }
+    const statusName =
+      statusNames[data.discord_status] ?? "Offline";
 
+    presence.textContent = statusName;
 
-        const result =
-            (await response.json()) as LanyardResponse;
+    status.className =
+      `discord-status ${data.discord_status}`;
 
+    /*
+     * =======================================================
+     * AVATAR
+     * =======================================================
+     */
 
-        if (!result.success) {
+    let avatarURL = "";
 
-            presence.textContent =
-                "Offline";
+    if (user.avatar) {
+      const extension = user.avatar.startsWith("a_")
+        ? "gif"
+        : "png";
 
-            return;
-        }
+      avatarURL =
+        `https://cdn.discordapp.com/avatars/` +
+        `${user.id}/${user.avatar}.${extension}?size=256`;
 
+      avatar.src = avatarURL;
+    }
 
-        const data =
-            result.data;
+    /*
+     * =======================================================
+     * AVATAR DECORATION
+     * =======================================================
+     */
 
-        const user =
-            data.discord_user;
+    if (user.avatar_decoration_data?.asset) {
+      decoration.src =
+        `https://cdn.discordapp.com/avatar-decoration-presets/` +
+        `${user.avatar_decoration_data.asset}.png?size=256`;
 
+      decoration.hidden = false;
+    } else {
+      decoration.hidden = true;
+    }
 
-        /* -------------------------------------------------
-           Status
-           ------------------------------------------------- */
+    /*
+     * =======================================================
+     * POPUP DATA
+     * =======================================================
+     */
 
-        const statusNames = {
-            online: "Online",
-            idle: "Idle",
-            dnd: "Do Not Disturb",
-            offline: "Offline",
-        };
+    if (popupAvatar && avatarURL) {
+      popupAvatar.src = avatarURL;
+    }
 
+    if (popupDecoration) {
+      if (user.avatar_decoration_data?.asset) {
+        popupDecoration.src =
+          `https://cdn.discordapp.com/avatar-decoration-presets/` +
+          `${user.avatar_decoration_data.asset}.png?size=256`;
 
-        presence.textContent =
-            statusNames[data.discord_status];
+        popupDecoration.hidden = false;
+      } else {
+        popupDecoration.hidden = true;
+      }
+    }
 
+    if (popupStatus) {
+      popupStatus.className =
+        `discord-popup-status ${data.discord_status}`;
+    }
 
-        status.className =
-            `discord-status ${data.discord_status}`;
+    if (popupName) {
+      popupName.textContent =
+        user.global_name || user.username;
+    }
 
+    if (popupUsername) {
+      popupUsername.textContent =
+        `@${user.username}`;
+    }
 
-        /* -------------------------------------------------
-           Avatar
-           ------------------------------------------------- */
+    if (popupStatusText) {
+      popupStatusText.textContent = statusName;
+    }
 
-        const avatarUrl =
-            getAvatarUrl(user, 256);
+    /*
+     * =======================================================
+     * ABOUT ME
+     *
+     * Lanyard does not provide Discord profile bio.
+     * So leave the section hidden unless you provide it
+     * yourself.
+     * =======================================================
+     */
 
+    if (popupAbout) {
+      popupAbout.textContent =
+        "Hobbyist developer and network engineer.";
+    }
 
-        if (avatarUrl) {
+    /*
+     * =======================================================
+     * ACTIVITY
+     * =======================================================
+     */
 
-            avatar.src =
-                avatarUrl;
-        }
+    if (popupActivity) {
+      const activities = data.activities ?? [];
 
+      if (data.spotify) {
+        popupActivity.textContent =
+          `Listening to ${data.spotify.song} — ${data.spotify.artist}`;
+      } else if (activities.length > 0) {
+        const activity = activities[0];
 
-        /* -------------------------------------------------
-           Avatar decoration
-           ------------------------------------------------- */
-
-        const decorationUrl =
-            getDecorationUrl(user);
-
-
-        if (decorationUrl) {
-
-            decoration.src =
-                decorationUrl;
-
-            decoration.hidden =
-                false;
-
+        if (activity.details && activity.state) {
+          popupActivity.textContent =
+            `${activity.name} — ${activity.details} — ${activity.state}`;
+        } else if (activity.details) {
+          popupActivity.textContent =
+            `${activity.name} — ${activity.details}`;
         } else {
-
-            decoration.hidden =
-                true;
+          popupActivity.textContent =
+            activity.name;
         }
-
-
-        /* -------------------------------------------------
-           Modal
-           ------------------------------------------------- */
-
-        initDiscordModal({
-            user,
-            status: data.discord_status,
-            activities:
-                data.activities ?? [],
-        });
-
-
-    } catch (error) {
-
-        console.error(
-            "Discord presence error:",
-            error,
-        );
-
-        presence.textContent =
-            "Offline";
+      } else {
+        popupActivity.textContent =
+          "No activity";
+      }
     }
+
+  } catch (error) {
+    console.error(
+      "Discord presence error:",
+      error,
+    );
+
+    presence.textContent = "Offline";
+
+    status.className =
+      "discord-status offline";
+  }
 }
