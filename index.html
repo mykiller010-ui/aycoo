@@ -13,51 +13,28 @@
 
   <meta
     name="description"
-    content="Hobbyist developer, network engineer, music enthusiast, artist who loves painting, and co-op gamer"
+    content="Hobbyist developer, network engineer, music enthusiast, artist, and co-op gamer"
   />
 
-  <meta
-    name="theme-color"
-    content="#090b14"
-  />
+  <meta name="theme-color" content="#090b14" />
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="/favicon.svg"
-  />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
   <link
     rel="canonical"
     href="https://aycoo.vip/"
   />
 
-
   <!-- Open Graph -->
 
-  <meta
-    property="og:type"
-    content="website"
-  />
-
-  <meta
-    property="og:site_name"
-    content="aycoo.vip"
-  />
-
-  <meta
-    property="og:url"
-    content="https://aycoo.vip/"
-  />
-
-  <meta
-    property="og:title"
-    content="影 - AYcoo"
-  />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="aycoo.vip" />
+  <meta property="og:url" content="https://aycoo.vip/" />
+  <meta property="og:title" content="影 - AYcoo" />
 
   <meta
     property="og:description"
-    content="Hobbyist developer, network engineer, music enthusiast, artist who loves painting, and co-op gamer."
+    content="Hobbyist developer, network engineer, music enthusiast, artist, and co-op gamer."
   />
 
   <meta
@@ -65,29 +42,18 @@
     content="https://aycoo.vip/og.jpg"
   />
 
-  <meta
-    property="og:image:width"
-    content="1200"
-  />
-
-  <meta
-    property="og:image:height"
-    content="630"
-  />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <meta
     name="twitter:card"
     content="summary_large_image"
   />
 
-
-  <!-- Main JavaScript -->
-
   <script
     type="module"
     src="/src/main.ts"
   ></script>
-
 </head>
 
 
@@ -104,18 +70,16 @@
   >
 
     <div class="bg-layer"></div>
-
     <div class="bg-layer"></div>
 
     <div class="bg-scrim"></div>
-
     <div class="bg-veil"></div>
 
   </div>
 
 
   <!-- =====================================================
-       RAIN / WIND / LIGHTNING CANVAS
+       RAIN / STORM CANVAS
        ===================================================== -->
 
   <canvas
@@ -134,7 +98,7 @@
 
 
   <!-- =====================================================
-       MAIN CONTENT
+       MAIN PAGE
        ===================================================== -->
 
   <main class="scene">
@@ -144,10 +108,7 @@
       id="tilt"
     >
 
-
-      <!-- =================================================
-           NAME
-           ================================================= -->
+      <!-- Kanji -->
 
       <p
         class="kanji"
@@ -159,6 +120,8 @@
       </p>
 
 
+      <!-- Name -->
+
       <h1
         class="name"
         id="name"
@@ -168,6 +131,8 @@
       </h1>
 
 
+      <!-- Divider -->
+
       <div
         class="rule"
         data-depth="1.5"
@@ -175,9 +140,7 @@
       ></div>
 
 
-      <!-- =================================================
-           TAGLINE
-           ================================================= -->
+      <!-- Tagline -->
 
       <p
         class="tagline"
@@ -201,13 +164,15 @@
 
       <!-- =================================================
            DISCORD PROFILE PREVIEW
-           Clicking the profile will open the small popup.
            ================================================= -->
 
       <div
         class="discord-profile"
         id="discord-profile"
         data-depth="0.5"
+        role="button"
+        tabindex="0"
+        aria-label="Open Discord profile"
       >
 
         <div class="discord-avatar-wrapper">
@@ -220,6 +185,7 @@
           <img
             id="discord-decoration"
             alt=""
+            hidden
           />
 
           <span
@@ -244,164 +210,8 @@
 
 
       <!-- =================================================
-           SMALL DISCORD PROFILE POPUP
-           
-           This is NOT a fullscreen modal.
-           It will appear as a small floating card.
-           ================================================= -->
-
-      <div
-        class="discord-popup"
-        id="discord-popup"
-        hidden
-      >
-
-
-        <!-- Close -->
-
-        <button
-          class="discord-popup-close"
-          id="discord-popup-close"
-          type="button"
-          aria-label="Close Discord profile"
-        >
-          ×
-        </button>
-
-
-        <!-- =================================================
-             DISCORD BANNER
-             ================================================= -->
-
-        <div class="discord-popup-banner">
-
-          <img
-            id="discord-popup-banner"
-            alt=""
-          />
-
-        </div>
-
-
-        <!-- =================================================
-             PROFILE CONTENT
-             ================================================= -->
-
-        <div class="discord-popup-content">
-
-
-          <!-- Avatar -->
-
-          <div class="discord-popup-avatar">
-
-            <img
-              id="discord-popup-avatar"
-              alt="Discord avatar"
-            />
-
-            <img
-              id="discord-popup-decoration"
-              alt=""
-            />
-
-            <span
-              id="discord-popup-status"
-              class="discord-popup-status"
-            ></span>
-
-          </div>
-
-
-          <!-- Name -->
-
-          <div
-            class="discord-popup-name"
-            id="discord-popup-name"
-          >
-            AYcoo
-          </div>
-
-
-          <!-- Username -->
-
-          <div
-            class="discord-popup-username"
-            id="discord-popup-username"
-          >
-            @aycoo
-          </div>
-
-
-          <!-- Separator -->
-
-          <div class="discord-popup-line"></div>
-
-
-          <!-- =================================================
-               ABOUT ME
-               ================================================= -->
-
-          <div class="discord-popup-section">
-
-            <h4>
-              ABOUT ME
-            </h4>
-
-            <p
-              id="discord-popup-about"
-            >
-              Loading...
-            </p>
-
-          </div>
-
-
-          <!-- =================================================
-               STATUS
-               ================================================= -->
-
-          <div class="discord-popup-section">
-
-            <h4>
-              STATUS
-            </h4>
-
-            <p
-              id="discord-popup-status-text"
-            >
-              Offline
-            </p>
-
-          </div>
-
-
-          <!-- =================================================
-               ACTIVITY
-               ================================================= -->
-
-          <div class="discord-popup-section">
-
-            <h4>
-              ACTIVITY
-            </h4>
-
-            <p
-              id="discord-popup-activity"
-            >
-              No activity
-            </p>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================================
            ABOUT ME - ENGLISH
-           ===================================================== -->
+           ================================================= -->
 
       <section
         class="about"
@@ -424,9 +234,9 @@
       </section>
 
 
-      <!-- =====================================================
+      <!-- =================================================
            ABOUT ME - ARABIC
-           ===================================================== -->
+           ================================================= -->
 
       <section
         class="about about-ar"
@@ -445,16 +255,182 @@
           أفضل بناء حلولي الخاصة بدلاً من الاعتماد على حلول الآخرين.
           أحب تحسين كل شيء، من الشبكات والمواقع إلى خوادم الألعاب.
           أهتم بالتفاصيل البصرية الصغيرة التي قد لا يلاحظها معظم الناس.
-          وأواصل التعلم من خلال التجربة والاستكشاف بدلاً من اتباع
-          الشروحات خطوة بخطوة.
+          وأواصل التعلم من خلال التجربة والاستكشاف بدلاً من اتباع الشروحات خطوة بخطوة.
+        </p>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================================
+       DISCORD PROFILE POPUP
+
+       IMPORTANT:
+       This is OUTSIDE .identity.
+
+       Do NOT move this inside #tilt.
+       ===================================================== -->
+
+  <div
+    class="discord-popup"
+    id="discord-popup"
+    hidden
+    aria-hidden="true"
+  >
+
+    <!-- Popup backdrop -->
+
+    <div
+      class="discord-popup-backdrop"
+      id="discord-popup-backdrop"
+    ></div>
+
+
+    <!-- =================================================
+         POPUP CARD
+         ================================================= -->
+
+    <div
+      class="discord-popup-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="discord-popup-name"
+    >
+
+      <!-- Close -->
+
+      <button
+        class="discord-popup-close"
+        id="discord-popup-close"
+        type="button"
+        aria-label="Close Discord profile"
+      >
+        ×
+      </button>
+
+
+      <!-- =================================================
+           PROFILE HEADER
+           ================================================= -->
+
+      <div class="discord-popup-header">
+
+        <div class="discord-popup-avatar">
+
+          <img
+            id="discord-popup-avatar"
+            alt="Discord avatar"
+          />
+
+          <img
+            id="discord-popup-decoration"
+            alt=""
+            hidden
+          />
+
+          <span
+            id="discord-popup-status"
+            class="discord-popup-status"
+          ></span>
+
+        </div>
+
+
+        <div class="discord-popup-identity">
+
+          <div
+            class="discord-popup-name"
+            id="discord-popup-name"
+          >
+            AYcoo
+          </div>
+
+
+          <div
+            class="discord-popup-username"
+            id="discord-popup-username"
+          >
+            @aycoo
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Divider -->
+
+      <div class="discord-popup-line"></div>
+
+
+      <!-- =================================================
+           ABOUT ME
+           ================================================= -->
+
+      <section
+        class="discord-popup-section"
+      >
+
+        <h4>
+          ABOUT ME
+        </h4>
+
+        <p
+          id="discord-popup-about"
+        >
+          Loading...
         </p>
 
       </section>
 
 
+      <!-- =================================================
+           STATUS
+           ================================================= -->
+
+      <section
+        class="discord-popup-section"
+      >
+
+        <h4>
+          STATUS
+        </h4>
+
+        <p
+          id="discord-popup-status-text"
+        >
+          Offline
+        </p>
+
+      </section>
+
+
+      <!-- =================================================
+           ACTIVITY
+           ================================================= -->
+
+      <section
+        class="discord-popup-section"
+      >
+
+        <h4>
+          ACTIVITY
+        </h4>
+
+        <p
+          id="discord-popup-activity"
+        >
+          No activity
+        </p>
+
+      </section>
+
     </div>
 
-  </main>
+  </div>
 
 
   <!-- =====================================================
@@ -468,9 +444,7 @@
   ></footer>
 
 
-  <!-- =====================================================
-       TOAST
-       ===================================================== -->
+  <!-- Toast -->
 
   <div
     class="toast"
@@ -481,15 +455,15 @@
 
 
   <!-- =====================================================
-       NO JAVASCRIPT MESSAGE
+       NOSCRIPT
        ===================================================== -->
 
   <noscript>
 
     <p class="noscript">
-      The site relies heavily on JavaScript,
-      so it won't work properly without it.
-      Please enable JavaScript and reload the page.
+      The site relies heavily on JavaScript, so it won't work
+      properly without it. Please enable JavaScript and reload
+      the page.
     </p>
 
   </noscript>
