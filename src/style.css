@@ -1019,7 +1019,570 @@ button {
 
 
 
+/* =========================================================
+   DISCORD PROFILE MODAL
+   ========================================================= */
 
+.discord-modal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+
+/* Open state */
+
+.discord-modal.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   BACKDROP
+   ========================================================= */
+
+.discord-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, .72);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.discord-modal-card {
+    position: relative;
+
+    width: min(440px, 100%);
+
+    max-height: min(720px, 90vh);
+
+    overflow-y: auto;
+
+    border-radius: 14px;
+
+    background:
+        #111214;
+
+    color: #f2f3f5;
+
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, .65),
+        0 0 0 1px rgba(255, 255, 255, .04);
+
+    transform:
+        translateY(20px)
+        scale(.96);
+
+    transition:
+        transform .3s cubic-bezier(.2, .8, .2, 1);
+
+    scrollbar-width: thin;
+}
+
+
+/* Popup animation */
+
+.discord-modal.open .discord-modal-card {
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.discord-modal-close {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    z-index: 10;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background:
+        rgba(0, 0, 0, .45);
+
+    color: rgba(255, 255, 255, .85);
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.discord-modal-close:hover {
+    background:
+        rgba(0, 0, 0, .7);
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   BANNER
+   ========================================================= */
+
+.discord-modal-banner {
+    position: relative;
+
+    width: 100%;
+    height: 150px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #202225,
+            #111214
+        );
+}
+
+
+.discord-modal-banner::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 45%,
+            rgba(17, 18, 20, .65)
+        );
+
+    pointer-events: none;
+}
+
+
+.discord-modal-banner img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+   ========================================================= */
+
+.discord-modal-profile {
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+
+    gap: 18px;
+
+    padding:
+        0 24px
+        20px;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.discord-modal-avatar {
+    position: relative;
+
+    flex-shrink: 0;
+
+    width: 96px;
+    height: 96px;
+
+    margin-top: -48px;
+
+    border-radius: 50%;
+
+    background:
+        #111214;
+
+    border:
+        6px solid #111214;
+}
+
+
+.discord-modal-avatar > img:first-child {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+
+.discord-modal-avatar > img:nth-child(2) {
+    position: absolute;
+
+    inset: -13%;
+
+    width: 126%;
+    height: 126%;
+
+    object-fit: contain;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.discord-modal-status {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+
+    border:
+        5px solid #111214;
+
+    background:
+        #80848e;
+}
+
+
+/* Status colors */
+
+.discord-modal-status.online {
+    background: #23a55a;
+}
+
+.discord-modal-status.idle {
+    background: #f0b232;
+}
+
+.discord-modal-status.dnd {
+    background: #f23f42;
+}
+
+.discord-modal-status.offline {
+    background: #80848e;
+}
+
+
+/* =========================================================
+   NAME
+   ========================================================= */
+
+.discord-modal-identity {
+    min-width: 0;
+
+    padding-bottom: 2px;
+}
+
+
+.discord-modal-name-row {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.discord-modal-name {
+    margin: 0;
+}
+
+
+.discord-modal-name-row h2 {
+    margin: 0;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    color: #f2f3f5;
+
+    overflow-wrap: anywhere;
+}
+
+
+.discord-modal-badges {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    flex-wrap: wrap;
+}
+
+
+.discord-modal-badges img {
+    width: 20px;
+    height: 20px;
+
+    object-fit: contain;
+}
+
+
+.discord-modal-username {
+    margin-top: 4px;
+
+    color: #b5bac1;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.discord-modal-body {
+    padding:
+        0 24px
+        24px;
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.discord-modal-section {
+    padding-top: 20px;
+
+    margin-top: 20px;
+
+    border-top:
+        1px solid rgba(255, 255, 255, .06);
+}
+
+
+.discord-modal-section:first-child {
+    padding-top: 0;
+    margin-top: 0;
+
+    border-top: 0;
+}
+
+
+.discord-modal-section h3 {
+    margin:
+        0 0 10px;
+
+    color: #b5bac1;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: .05em;
+}
+
+
+.discord-modal-section p {
+    margin: 0;
+
+    color: #dbdee1;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   ACTIVITY
+   ========================================================= */
+
+.discord-modal-activity {
+    padding: 14px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, .035);
+
+    border:
+        1px solid rgba(255, 255, 255, .05);
+
+    color: #dbdee1;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   AVATAR CLICK
+   ========================================================= */
+
+.discord-profile {
+    cursor: pointer;
+}
+
+
+.discord-avatar-wrapper {
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
+}
+
+
+.discord-profile:hover .discord-avatar-wrapper {
+    transform:
+        translateY(-2px)
+        scale(1.03);
+
+    filter:
+        brightness(1.08);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .discord-modal {
+        padding: 10px;
+    }
+
+    .discord-modal-card {
+        width: 100%;
+
+        max-height: 92vh;
+
+        border-radius: 12px;
+    }
+
+    .discord-modal-banner {
+        height: 125px;
+    }
+
+    .discord-modal-profile {
+        gap: 14px;
+
+        padding:
+            0 18px
+            18px;
+    }
+
+    .discord-modal-avatar {
+        width: 82px;
+        height: 82px;
+
+        margin-top: -41px;
+
+        border-width: 5px;
+    }
+
+    .discord-modal-status {
+        width: 21px;
+        height: 21px;
+
+        border-width: 4px;
+    }
+
+    .discord-modal-name-row h2 {
+        font-size: 19px;
+    }
+
+    .discord-modal-body {
+        padding:
+            0 18px
+            20px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .discord-modal-profile {
+        align-items: center;
+    }
+
+    .discord-modal-avatar {
+        width: 72px;
+        height: 72px;
+
+        margin-top: -36px;
+    }
+
+    .discord-modal-name-row h2 {
+        font-size: 17px;
+    }
+
+}
 
 .section{
     margin-top:70px;
