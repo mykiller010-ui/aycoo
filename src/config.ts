@@ -69,7 +69,7 @@ export const links: SocialLink[] = [
   label: "Spotify",
   icon: "spotify",
   color: "#1db954",
-  href: "https://open.spotify.com/user/ebi00oxrqpcj99vi96cii1xxn?si=2785c1039e01465c",
+  href: "",
 },
   
  
@@ -80,8 +80,8 @@ export const tracks: Track[] = [
 
 
 {
-  title: "H - 222",
-    src: "./music/222.mp3",
+  title: "H - Quran",
+    src: "./music/Quran.mp3",
   
   },
  
