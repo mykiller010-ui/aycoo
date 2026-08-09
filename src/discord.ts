@@ -108,23 +108,23 @@ export async function initDiscord(): Promise<void> {
    * =========================================================
    */
 
-  function openPopup(): void {
+ function openPopup(): void {
     if (!popup) return;
 
+    popup.hidden = false;
     popup.classList.add("open");
-    popup.setAttribute("aria-hidden", "false");
 
     document.body.classList.add("discord-popup-open");
-  }
+}
 
   function closePopup(): void {
     if (!popup) return;
 
     popup.classList.remove("open");
-    popup.setAttribute("aria-hidden", "true");
+    popup.hidden = true;
 
     document.body.classList.remove("discord-popup-open");
-  }
+}
 
   /*
    * CLICK DISCORD PROFILE
