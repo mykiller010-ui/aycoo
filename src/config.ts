@@ -57,7 +57,7 @@ export const links: SocialLink[] = [
   label: "TikTok",
   icon: "tiktok",
   color: "#ffffff",
-  href: "https://www.tiktok.com/@YOUR_USERNAME",
+  href: "https://www.tiktok.com/@aycoo04",
 },
 {
   label: "X",
