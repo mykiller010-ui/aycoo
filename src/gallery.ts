@@ -1,6 +1,8 @@
 const galleryImages = [
   "./gallery/1.png",
-  "./gallery/2.png"
+  "./gallery/2.png",
+  "./gallery/3.png",
+  "./gallery/4.png"
  
 ];
 
