@@ -97,5 +97,5 @@ export const settings = {
   slideFade: 1800,
   shuffleSlides: true,
   startVolume: 0.12,
-  autoplayOnFirstInteraction: true,
+  autoplayOnFirstInteraction: false,
 };
